@@ -228,6 +228,10 @@ app.delete("/memories/:id", async (req, res) => {
   }
 });
 
+app.get("/health", (req,res) =>{
+  res.send("Hiiiii")
+})
+
 // ===============================
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
