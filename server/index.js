@@ -14,6 +14,7 @@ import { extractMemory } from "./memory/extractMemory.js";
 import { processMemory } from "./memory/memoryPipeline.js";
 import { addToContext, getContext } from "./memory/contextWindow.js";
 import { retrieveMemory } from "./memory/retrieveMemory.js";
+import { getMemories, deleteMemory } from "./memory/memoryManager.js";
 
 const app = express();
 const upload = multer({ storage: multer.memoryStorage() });
@@ -150,6 +151,7 @@ You have access to long-term memory. When answering, explicitly mention what you
 If the context is not relevant, ignore it and answer fully from your general knowledge.
 If there are conflicting facts, prioritize the most recent one. **TRUST [JUST LEARNED] FACTS ABOVE ALL ELSE.**
 When using 'Long-term Memory', if you see multiple facts about the same topic (e.g. job), ONLY use the one with the latest date. Ignore older conflicting memories.
+Give all answers in very detail until explicitly asked to be concise and after answerin in detail ask the user next related question to continue the conversation.
 
 Context:
 ${extraContext}
@@ -201,6 +203,28 @@ ${extraContext}
     console.error("❌ Chat error:", err);
     res.write("⚠️ Error: " + (err.message || "Server error"));
     res.end();
+  }
+});
+
+// ===============================
+// Memory Management Endpoints
+// ===============================
+
+app.get("/memories", async (req, res) => {
+  try {
+    const memories = await getMemories();
+    res.json(memories);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to fetch memories" });
+  }
+});
+
+app.delete("/memories/:id", async (req, res) => {
+  try {
+    await deleteMemory(req.params.id);
+    res.json({ success: true });
+  } catch (err) {
+    res.status(500).json({ error: "Failed to delete memory" });
   }
 });
 

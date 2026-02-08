@@ -1,3 +1,4 @@
+import { saveMemory } from "./memoryManager.js";
 import crypto from "crypto";
 import { pinecone, index } from "../rag/pinecone.js";
 
@@ -29,16 +30,23 @@ export async function storeMemory(memories) {
     const dup = await isDuplicateMemory(embedding);
     if (dup) continue;
 
+    const id = crypto.randomUUID();
+    const memoryData = {
+      id,
+      text: memories[i],
+      userId: "default-user",
+      type: "memory",
+      createdAt: new Date().toISOString(),
+    };
+
     records.push({
-      id: crypto.randomUUID(),
+      id,
       values: embedding,
-      metadata: {
-        text: memories[i],
-        userId: "default-user",
-        type: "memory",
-        createdAt: new Date().toISOString(),
-      },
+      metadata: memoryData,
     });
+
+    // Sync to local JSON
+    await saveMemory(memoryData);
   }
 
   if (records.length) {
