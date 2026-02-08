@@ -9,7 +9,7 @@ export async function retrieveMemory(query, userId = "default") {
 
   const result = await index.query({
     vector: embedding.data[0].values,
-    topK: 5,
+    topK: 10,
     namespace: "memory",
     includeMetadata: true,
   });

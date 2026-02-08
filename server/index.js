@@ -149,6 +149,7 @@ Integrate the provided context naturally into your response.
 You have access to long-term memory. When answering, explicitly mention what you recall if it's relevant (e.g., "I remember you mentioned...").
 If the context is not relevant, ignore it and answer fully from your general knowledge.
 If there are conflicting facts, prioritize the most recent one. **TRUST [JUST LEARNED] FACTS ABOVE ALL ELSE.**
+When using 'Long-term Memory', if you see multiple facts about the same topic (e.g. job), ONLY use the one with the latest date. Ignore older conflicting memories.
 
 Context:
 ${extraContext}
