@@ -1,1 +1,16 @@
-[]
+[
+  {
+    "id": "fdc1d5cb-faeb-4947-a540-0049b55678f3",
+    "text": "Chef of Bihar",
+    "userId": "default-user",
+    "type": "memory",
+    "createdAt": "2026-02-11T09:37:28.527Z"
+  },
+  {
+    "id": "c0763396-3713-4fd5-aa8d-ecbc157b1d7c",
+    "text": "Joe Biden",
+    "userId": "default-user",
+    "type": "memory",
+    "createdAt": "2026-02-11T09:34:35.934Z"
+  }
+]

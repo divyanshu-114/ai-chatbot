@@ -17,6 +17,19 @@ export function detectIntent(message) {
     ) {
       return "WEB";
     }
+
+    if (
+      text.includes("who is") ||
+      text.includes("what is") ||
+      text.includes("when is") ||
+      text.includes("where is") ||
+      text.includes("latest") ||
+      text.includes("current") ||
+      text.includes("today") ||
+      text.includes("news")
+    ) {
+      return "WEB";
+    }
   
     return "NORMAL";
   }
